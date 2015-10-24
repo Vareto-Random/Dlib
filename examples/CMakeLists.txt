@@ -114,7 +114,10 @@ add_example(video_tracking_ex)
 add_example(xml_parser_ex)
 
 
-find_package(OpenCV)
+find_package( OpenCV 3.0 REQUIRED HINTS /usr/local/include )
+INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(/opt/X11/include)
+
 if (OpenCV_FOUND)
    include_directories(${OpenCV_INCLUDE_DIRS})
 
