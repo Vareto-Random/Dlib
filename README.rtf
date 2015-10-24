@@ -1,0 +1,71 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf110
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;\red236\green236\blue236;\red38\green38\blue38;
+\red251\green0\blue7;\red15\green112\blue1;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh8440\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs48 \cf0 \expnd0\expndtw0\kerning0
+Compiling on Any Operating System Using CMake\
+\pard\pardeftab720\partightenfactor0
+
+\b0\fs26 \cf0 The best way to compile a program that uses dlib is to use {\field{\*\fldinst{HYPERLINK "http://www.cmake.org/"}}{\fldrslt \cf2 CMake}}. For example, the following commands will compile the example programs on any operating system:\cb3 \
+cd examples\
+mkdir build\
+cd build\
+cmake ..\
+cmake --build . --config Release\
+\cb1 \
+Note that you also need to have a C++ compiler installed on your system. There are free C++ compilers for most operating systems. For example, Visual Studio Express is free on Windows and GCC is free and works well on Mac OS X and Linux systems. If you have multiple compilers/IDEs installed then you can tell CMake which one you want it to use via the -G option.\
+\
+The {\field{\*\fldinst{HYPERLINK "http://dlib.net/examples/CMakeLists.txt.html"}}{\fldrslt \cf2 examples/CMakeLists.txt}} file tells CMake how to build the examples. You can create your own projects by starting with this file and editing it however you like. You can also perform additional configuration of a cmake project using the cmake-gui or ccmake tool. For example, if you are using dlib's face detector then you should turn on either SSE4 or AVX instructions since this makes it run much faster (also see {\field{\*\fldinst{HYPERLINK "http://dlib.net/faq.html#Whyisdlibslow"}}{\fldrslt \cf2 this FAQ}}).\
+\
+Finally, note that when using Visual Studio, CMake will by default generate a 32bit executable. This means the programs you compile will only be able to use 2GB of RAM. To avoid this, you need to tell CMake to generate a 64bit executable. \
+\
+You do this by using a command like\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3 cmake -G "Visual Studio 10 2010 Win64" ..\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 instead of\cb3 \
+cmake ..\
+\cb1 You can see the list of valid arguments to -G by running cmake with no options.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\b \cf0 Compiling on Linux From Command Line\
+\pard\pardeftab720\partightenfactor0
+
+\b0 \cf0 From within the examples folder, you can compile nearly all of the examples with a single command like so:\cb3 \
+g++ -O3 -I.. ../dlib/all/source.cpp -lpthread -lX11 example_program_name.cpp\
+\cb1 \
+Note that not all examples require this much work. For example, the svm_ex.cpp example can be compiled with just:\cb3 \
+g++ -O3 -I.. svm_ex.cpp\
+\cb1 \
+On non-Linux systems like Solaris, you might have to link to other libraries. For example, I have seen systems where it was also necessary to supply -lnsl or -lsocket options to g++. Additionally, the X11 development library isn't installed on Ubuntu by default. So if you require it and are using Ubuntu you can install it by typing:\cb3 \
+sudo apt-get install libx11-dev\
+\pard\pardeftab720\partightenfactor0
+
+\b \cf4 \cb1 \
+How to compile CLM-Framework ?\
+\pard\pardeftab720\partightenfactor0
+
+\b0 \cf4 Compiling CLM-Framework was a bit involved for OSX. For windows and linux there are detailed instructions {\field{\*\fldinst{HYPERLINK "https://github.com/TadasBaltrusaitis/CLM-framework"}}{\fldrslt here}}. For compiling version 1.3.0 on OSX, I used the instructions for linux but made the following changes.\
+Most of the dependencies were installed using {\field{\*\fldinst{HYPERLINK "http://brew.sh/"}}{\fldrslt brew}}.\
+In file 
+\b CMakeLists.txt
+\b0  ( red text was replaced with green text ).\
+\pard\pardeftab720\partightenfactor0
+\cf5 \strike \strikec5 find_package( OpenCV 3.0 REQUIRED )\cf4 \strike0\striked0 \
+\pard\pardeftab720\partightenfactor0
+\cf6 find_package( OpenCV 3.0 REQUIRED HINTS /path/to/opencv )\
+INCLUDE_DIRECTORIES($\{OpenCV_INCLUDE_DIRS\})\
+INCLUDE_DIRECTORIES(/opt/X11/include)\
+\pard\pardeftab720\partightenfactor0
+\cf4 In file 
+\b exe/SimpleCLM/SimpleCLM.cpp
+\b0 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \strike \strikec5 writerFace = VideoWriter(tracked_videos_output[f_n], CV_FOURCC(\'91D\'92,\'92I\'92,\'92V\'92,\'92X\'92), 30, captured_image.size(), true);\strike0\striked0 \
+\pard\pardeftab720\partightenfactor0
+\cf6 writerFace = VideoWriter(tracked_videos_output[f_n], CV_FOURCC(\'91M\'92,\'92P\'92,\'924\uc0\u8242 ,\'92V\'92), 15, captured_image.size(), true);}
