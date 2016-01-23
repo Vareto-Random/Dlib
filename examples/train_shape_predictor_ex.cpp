@@ -47,16 +47,16 @@ int main(int argc, char** argv)
         // thing we do is load that dataset.  This means you need to supply the
         // path to this faces folder as a command line argument so we will know
         // where it is.
-        if (argc != 2)
+        if (argc != 3)
         {
-            cout << "Give the path to the examples/faces directory as the argument to this" << endl;
-            cout << "program.  For example, if you are in the examples folder then execute " << endl;
-            cout << "this program by running: " << endl;
-            cout << "   ./train_shape_predictor_ex faces" << endl;
+            cout << "Give the path to the both training and testing directories as the argument to this" << endl;
+            cout << "program. For example: " << endl;
+            cout << "   ./train_shape_predictor_ex train test" << endl;
             cout << endl;
             return 0;
         }
-        const std::string faces_directory = argv[1];
+        const std::string train_directory = argv[1];
+        const std::string test_directory = argv[1];
         // The faces directory contains a training dataset and a separate
         // testing dataset.  The training data consists of 4 images, each
         // annotated with rectangles that bound each human face along with 68
@@ -88,8 +88,8 @@ int main(int argc, char** argv)
         // tool which can be found in the tools/imglab folder.  It is a simple
         // graphical tool for labeling objects in images.  To see how to use it
         // read the tools/imglab/README.txt file.
-        load_image_dataset(images_train, faces_train, faces_directory+"/training_with_face_landmarks.xml");
-        load_image_dataset(images_test, faces_test, faces_directory+"/testing_with_face_landmarks.xml");
+        load_image_dataset(images_train, faces_train, train_directory+"/training_with_face_landmarks.xml");
+        load_image_dataset(images_test, faces_test, test_directory+"/testing_with_face_landmarks.xml");
 
         // Now make the object responsible for training the model.  
         shape_predictor_trainer trainer;
