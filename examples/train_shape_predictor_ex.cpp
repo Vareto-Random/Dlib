@@ -56,7 +56,7 @@ int main(int argc, char** argv)
             return 0;
         }
         const std::string train_directory = argv[1];
-        const std::string test_directory = argv[1];
+        const std::string test_directory = argv[2];
         // The faces directory contains a training dataset and a separate
         // testing dataset.  The training data consists of 4 images, each
         // annotated with rectangles that bound each human face along with 68
@@ -88,8 +88,8 @@ int main(int argc, char** argv)
         // tool which can be found in the tools/imglab folder.  It is a simple
         // graphical tool for labeling objects in images.  To see how to use it
         // read the tools/imglab/README.txt file.
-        load_image_dataset(images_train, faces_train, train_directory+"/training_with_face_landmarks.xml");
         load_image_dataset(images_test, faces_test, test_directory+"/testing_with_face_landmarks.xml");
+        load_image_dataset(images_train, faces_train, train_directory+"/training_with_face_landmarks.xml");
 
         // Now make the object responsible for training the model.  
         shape_predictor_trainer trainer;
