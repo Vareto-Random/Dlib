@@ -101,7 +101,7 @@ int main(int argc, char** argv)
         // have a very small dataset.  In particular, setting the oversampling
         // to a high amount (300) effectively boosts the training set size, so
         // that helps this example.
-        trainer.set_oversampling_amount(300);
+        trainer.set_oversampling_amount(100);
         // I'm also reducing the capacity of the model by explicitly increasing
         // the regularization (making nu smaller) and by using trees with
         // smaller depths.  
