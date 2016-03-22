@@ -47,11 +47,11 @@ int main(int argc, char** argv)
         // thing we do is load that dataset.  This means you need to supply the
         // path to this faces folder as a command line argument so we will know
         // where it is.
-        if (argc != 3)
+        if ((argc != 3) && (argc != 5))
         {
             cout << "Give the path to the both training and testing directories as the argument to this" << endl;
             cout << "program. For example: " << endl;
-            cout << "   ./train_shape_predictor_ex train test" << endl;
+            cout << "   ./train_shape_predictor_ex train test [trainXML] [testXML]" << endl;
             cout << endl;
             return 0;
         }
@@ -88,8 +88,16 @@ int main(int argc, char** argv)
         // tool which can be found in the tools/imglab folder.  It is a simple
         // graphical tool for labeling objects in images.  To see how to use it
         // read the tools/imglab/README.txt file.
-        load_image_dataset(images_test, faces_test, test_directory+"/testing_with_face_landmarks.xml");
-        load_image_dataset(images_train, faces_train, train_directory+"/training_with_face_landmarks.xml");
+        if (argc == 3)
+        {
+            load_image_dataset(images_test, faces_test, test_directory+"/testing_with_face_landmarks.xml");
+            load_image_dataset(images_train, faces_train, train_directory+"/training_with_face_landmarks.xml");
+        } 
+        else if (argc == 5)
+        {
+            load_image_dataset(images_test, faces_test, test_directory + "/" + std::string(argv[3]));
+            load_image_dataset(images_train, faces_train, train_directory + "/" + std::string(argv[4]));
+        }
 
         // Now make the object responsible for training the model.  
         shape_predictor_trainer trainer;
@@ -101,7 +109,7 @@ int main(int argc, char** argv)
         // have a very small dataset.  In particular, setting the oversampling
         // to a high amount (300) effectively boosts the training set size, so
         // that helps this example.
-        trainer.set_oversampling_amount(100);
+        trainer.set_oversampling_amount(300);
         // I'm also reducing the capacity of the model by explicitly increasing
         // the regularization (making nu smaller) and by using trees with
         // smaller depths.  
