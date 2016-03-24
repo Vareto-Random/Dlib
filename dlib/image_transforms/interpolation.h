@@ -1856,11 +1856,11 @@ namespace dlib
         const double padding = 0.2
     )
     {
-        DLIB_CASSERT(det.num_parts() == 68,
-            "\t chip_details get_face_chip_details()"
-            << "\n\t You must give a detection with exactly 68 parts in it."
-            << "\n\t det.num_parts(): " << det.num_parts()
-        );
+        // DLIB_CASSERT(det.num_parts() == 68,
+        //     "\t chip_details get_face_chip_details()"
+        //     << "\n\t You must give a detection with exactly 68 parts in it."
+        //     << "\n\t det.num_parts(): " << det.num_parts()
+        // );
         DLIB_CASSERT(padding >= 0 && size > 0,
             "\t chip_details get_face_chip_details()"
             << "\n\t Invalid inputs were given to this function."
@@ -1888,7 +1888,7 @@ namespace dlib
             0.784792, 0.824182, 0.831803, 0.824182
         };
 
-        COMPILE_TIME_ASSERT(sizeof(mean_face_shape_x)/sizeof(double) == 68-17);
+        // COMPILE_TIME_ASSERT(sizeof(mean_face_shape_x)/sizeof(double) == 68-17);
 
         std::vector<dlib::vector<double,2> > from_points, to_points;
         for (unsigned long i = 17; i < det.num_parts(); ++i)

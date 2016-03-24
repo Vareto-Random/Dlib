@@ -18,42 +18,42 @@ namespace dlib
         std::vector<image_window::overlay_line> lines;
         for (unsigned long i = 0; i < dets.size(); ++i)
         {
-            DLIB_CASSERT(dets[i].num_parts() == 68,
-                "\t std::vector<image_window::overlay_line> render_face_detections()"
-                << "\n\t Invalid inputs were given to this function. "
-                << "\n\t dets["<<i<<"].num_parts():  " << dets[i].num_parts() 
-            );
+            // DLIB_CASSERT(dets[i].num_parts() == 39,
+            //     "\t std::vector<image_window::overlay_line> render_face_detections()"
+            //     << "\n\t Invalid inputs were given to this function. "
+            //     << "\n\t dets["<<i<<"].num_parts():  " << dets[i].num_parts() 
+            // );
 
             const full_object_detection& d = dets[i];
-            for (unsigned long i = 1; i <= 16; ++i)
+            for (unsigned long i = 1; i <= 8; ++i) // face outline
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
 
-            for (unsigned long i = 28; i <= 30; ++i)
+            for (unsigned long i = 10; i <= 13; ++i) // eyebrow
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
 
-            for (unsigned long i = 18; i <= 21; ++i)
+            for (unsigned long i = 15; i <= 17; ++i) // noseTop
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            for (unsigned long i = 23; i <= 26; ++i)
+            
+            for (unsigned long i = 18; i <= 20; ++i) // noseBottom
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            for (unsigned long i = 31; i <= 35; ++i)
-                lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            lines.push_back(image_window::overlay_line(d.part(30), d.part(35), color));
 
-            for (unsigned long i = 37; i <= 41; ++i)
+            for (unsigned long i = 22; i <= 26; ++i) // eye
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            lines.push_back(image_window::overlay_line(d.part(36), d.part(41), color));
+            lines.push_back(image_window::overlay_line(d.part(21), d.part(26), color));
 
-            for (unsigned long i = 43; i <= 47; ++i)
+            for (unsigned long i = 31; i <= 35; ++i) // outer mouth
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            lines.push_back(image_window::overlay_line(d.part(42), d.part(47), color));
+            lines.push_back(image_window::overlay_line(d.part(35), d.part(27), color));
 
-            for (unsigned long i = 49; i <= 59; ++i)
-                lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            lines.push_back(image_window::overlay_line(d.part(48), d.part(59), color));
+            //inner mouth
+            lines.push_back(image_window::overlay_line(d.part(28), d.part(36), color));
+            lines.push_back(image_window::overlay_line(d.part(36), d.part(38), color));
+            lines.push_back(image_window::overlay_line(d.part(38), d.part(37), color));
+            lines.push_back(image_window::overlay_line(d.part(37), d.part(29), color));
 
-            for (unsigned long i = 61; i <= 67; ++i)
-                lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            lines.push_back(image_window::overlay_line(d.part(60), d.part(67), color));
+            // for (unsigned long i = 61; i <= 67; ++i)
+            //     lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
+            // lines.push_back(image_window::overlay_line(d.part(60), d.part(67), color));
         }
         return lines;
     }

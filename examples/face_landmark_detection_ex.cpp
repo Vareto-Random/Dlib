@@ -86,7 +86,7 @@ int main(int argc, char** argv)
             array2d<rgb_pixel> img;
             load_image(img, argv[i]);
             // Make the image larger so we can detect small faces.
-            pyramid_up(img);
+            //pyramid_up(img);
 
             // Now tell the face detector to give us a list of bounding boxes
             // around all the faces in the image.
