@@ -121,6 +121,7 @@ int main(int argc, char** argv)
             //extract_image_chips(img, get_face_chip_details(shape), face_chips);
             //win_faces.set_image(tile_images(face_chips));
 
+            //save_jpeg(img, "image_" + std::to_string(i) + ".jpg");
             cout << "Hit enter to process the next image..." << endl;
             cin.get();
         }

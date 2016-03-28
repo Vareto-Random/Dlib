@@ -41,14 +41,17 @@ namespace dlib
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
             lines.push_back(image_window::overlay_line(d.part(21), d.part(26), color));
 
-            for (unsigned long i = 31; i <= 35; ++i) // outer mouth
-                lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
-            lines.push_back(image_window::overlay_line(d.part(35), d.part(27), color));
+            //outer mouth
+            lines.push_back(image_window::overlay_line(d.part(27), d.part(35), color));
+            lines.push_back(image_window::overlay_line(d.part(35), d.part(34), color));
+            lines.push_back(image_window::overlay_line(d.part(34), d.part(33), color));
+            lines.push_back(image_window::overlay_line(d.part(33), d.part(32), color));
+            lines.push_back(image_window::overlay_line(d.part(32), d.part(31), color));
+            lines.push_back(image_window::overlay_line(d.part(31), d.part(30), color));
 
             //inner mouth
             lines.push_back(image_window::overlay_line(d.part(28), d.part(36), color));
-            lines.push_back(image_window::overlay_line(d.part(36), d.part(38), color));
-            lines.push_back(image_window::overlay_line(d.part(38), d.part(37), color));
+            lines.push_back(image_window::overlay_line(d.part(36), d.part(37), color));
             lines.push_back(image_window::overlay_line(d.part(37), d.part(29), color));
 
             // for (unsigned long i = 61; i <= 67; ++i)

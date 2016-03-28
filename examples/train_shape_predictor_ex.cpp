@@ -90,13 +90,13 @@ int main(int argc, char** argv)
         // read the tools/imglab/README.txt file.
         if (argc == 3)
         {
-            load_image_dataset(images_test, faces_test, test_directory+"/testing_with_face_landmarks.xml");
             load_image_dataset(images_train, faces_train, train_directory+"/training_with_face_landmarks.xml");
+            load_image_dataset(images_test, faces_test, test_directory+"/testing_with_face_landmarks.xml");
         } 
         else if (argc == 5)
         {
-            load_image_dataset(images_test, faces_test, test_directory + "/" + std::string(argv[3]));
-            load_image_dataset(images_train, faces_train, train_directory + "/" + std::string(argv[4]));
+            load_image_dataset(images_train, faces_train, train_directory + "/" + std::string(argv[3]));
+            load_image_dataset(images_test, faces_test, test_directory + "/" + std::string(argv[4]));
         }
 
         // Now make the object responsible for training the model.  
