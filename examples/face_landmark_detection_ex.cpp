@@ -108,16 +108,18 @@ int main(int argc, char** argv)
                 shapes.push_back(shape);
             }
 
+            full_object_detection shape = sp(img, rectangle(0, 0, num_columns(img), num_rows(img)));
+
             // Now let's view our face poses on the screen.
             win.clear_overlay();
             win.set_image(img);
-            win.add_overlay(render_face_detections(shapes));
+            win.add_overlay(render_face_detections(shape));
 
             // We can also extract copies of each face that are cropped, rotated upright,
             // and scaled to a standard size as shown here:
-            dlib::array<array2d<rgb_pixel> > face_chips;
-            extract_image_chips(img, get_face_chip_details(shapes), face_chips);
-            win_faces.set_image(tile_images(face_chips));
+            //dlib::array<array2d<rgb_pixel> > face_chips;
+            //extract_image_chips(img, get_face_chip_details(shape), face_chips);
+            //win_faces.set_image(tile_images(face_chips));
 
             cout << "Hit enter to process the next image..." << endl;
             cin.get();
